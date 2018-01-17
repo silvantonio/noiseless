@@ -15,8 +15,8 @@ delimiter = ","
 names = pd.read_csv('data/listings/v2/features_names.csv', sep=delimiter, header=None)
 
 # load data
-#X = np.loadtxt('data/listings/v2/listings.csv', delimiter=delimiter)
-X = np.loadtxt('data/listings/v2/listings_improved.csv', delimiter=delimiter)
+X = np.loadtxt('data/listings/v2/listings.csv', delimiter=delimiter)
+#X = np.loadtxt('data/listings/v2/listings_improved.csv', delimiter=delimiter)
 y = np.loadtxt('data/listings/v2/listings_target.csv', delimiter=delimiter)
 
 # instance of knn

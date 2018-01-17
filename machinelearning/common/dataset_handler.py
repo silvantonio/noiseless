@@ -1,7 +1,7 @@
 from sklearn.neighbors import KNeighborsClassifier
 
 
-class DatasetHandler:
+class DatasetHandler(KNeighborsClassifier):
     n_neighbors = 15
     name = "Current dataset"
     description = "Currently loaded dataset"
@@ -33,16 +33,19 @@ class DatasetHandler:
         self.knn = KNeighborsClassifier(n_neighbors)
         self.knn.fit(self.X, self.y)
 
-    def predict(self, X1, y1):
+    def test_train(self, X1, y1):
         self.X1 = X1
         self.y1 = y1
-        print(self.X1)
-        exit()
-        self.prediction = self.knn.predict(self.X1)
+        self.prediction = self.predict(self.X1)
         self.prediction_wrong = 0
         for index in range(len(self.prediction)):
             if self.y1[index] != self.prediction[index]:
                 self.prediction_wrong += 1
+        self.__print_report()
+
+    def predict(self, X1):
+        self.X1 = X1
+        self.prediction = self.knn.predict(self.X1)
         return self.prediction
 
     def get_prediction(self):
@@ -60,7 +63,7 @@ class DatasetHandler:
     def get_prediction_accurancy(self):
         return (self.get_prediction_total() - self.prediction_wrong) / self.get_prediction_total()
 
-    def print_report(self):
+    def __print_report(self):
         print('\n###################################################')
         print('Name: ' + self.name + '\nDescription:' + self.description)
         print('---------------------------------------------------')
