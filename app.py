@@ -44,12 +44,7 @@ def mltest():
     target = gh.load_csv('data/listings/listings_test_target.csv')
     gh.knn.test_train(data, target)
 
-    data = {
-        'result': int(result)
-    }
-    js = json.dumps(data)
-    resp = Response(js, status=200, mimetype='application/json')
-    return resp
+    return render_template('index.html', powered_by=environ.get('POWERED_BY', 'Antonio Silva'))
 
 
 if __name__ == '__main__':
