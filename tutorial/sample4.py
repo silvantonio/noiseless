@@ -15,8 +15,8 @@ delimiter = ","
 names = pd.read_csv('data/listings/v2/features_names.csv', sep=delimiter, header=None)
 
 # load data
-X = np.loadtxt('data/listings/v2/listings.csv', delimiter=delimiter)
-#X = np.loadtxt('data/listings/v2/listings_improved.csv', delimiter=delimiter)
+#X = np.loadtxt('data/listings/v2/listings.csv', delimiter=delimiter)
+X = np.loadtxt('data/listings/v2/listings_improved.csv', delimiter=delimiter)
 y = np.loadtxt('data/listings/v2/listings_target.csv', delimiter=delimiter)
 
 # instance of knn
@@ -108,9 +108,30 @@ print('Test 3 accuracy ' + str(accuracy*100) + '%\n')
 
 ##########################
 #
+# Test4
+#
+##########################
+print('Test 4\nDescription: Test with 100% infringing adverts')
+
+#load data for test 3
+X3 = np.loadtxt('data/listings/v2/test4/listings_test.csv', delimiter=delimiter)
+
+# predict
+prediction = knn.predict(X3)
+unique, counts = np.unique(prediction, return_counts=True)
+results = dict(zip(unique, counts))
+print('\t\tTotal listing:      ' + str(len(prediction)))
+print('\t\tIrrelevant listing: ' + str(results[1.0]))
+print('\t\tOK listing:         ' + str(results[2.0]))
+print('\t\tInfringing listing: ' + str(results[3.0]))
+print('Accuracy: ' + str((results[3.0]/len(prediction))*100))
+
+##########################
+#
 # random stuff
 #
 ##########################
+print('\nrandom test 1')
 prediction = knn.predict([
     [1, 1, 1, 1, 840, 0, 840, 1, 114.2, 1, 0],
     [1, 1, 1, 1, 840, 0, 840, 1, 105.41, 1, 0],
@@ -136,6 +157,7 @@ prediction = knn.predict([
 ])
 print(prediction)
 
+print('\nrandom test 2')
 prediction = knn.predict([
     [1, 1, 1, 1, 840, 5, 840, 1, 114.2, 1, 0],
     [1, 1, 1, 1, 840, 5, 840, 1, 105.41, 1, 0],
@@ -158,5 +180,11 @@ prediction = knn.predict([
     [1, 1, 1, 1, 356, 5, 356, 1, 9.66, 5, -3996],
     [1, 1, 1, 1, 356, 5, 356, 1, 9.66, 6, -3996],
     [1, 2, 2, 1, 840, 5, 840, 1, 254.77, 1, -4000]
+])
+print(prediction)
+
+print('\nrandom test 3')
+prediction = knn.predict([
+    [1, 2, 2, 1, 840, 0, 840, 1, 156.24, 5, 0]
 ])
 print(prediction)
