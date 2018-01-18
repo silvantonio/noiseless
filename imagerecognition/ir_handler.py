@@ -1,11 +1,10 @@
 import os.path
 from skimage import data, io, filters
 from skimage.color import rgb2gray
-import matplotlib.pyplot as plt
 import tensorflow as tf
 import numpy as np
 from skimage import transform
-import random
+
 
 class GeneralIRHandler:
     data_root = "data/logos/"
