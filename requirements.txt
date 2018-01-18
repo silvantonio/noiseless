@@ -1,3 +1,5 @@
+requests
+tensorflow
 numpy
 scipy
 matplotlib
@@ -6,5 +8,8 @@ sympy
 flask
 redis
 sklearn
-tensorflow
+jupyter
+Pillow
+scikit-learn
 scikit-image
+
