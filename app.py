@@ -49,12 +49,9 @@ def ml():
 
 @app.route('/ir')
 def ir():
-    #print(request.method)
-    #print(request.args.getlist('arg[]'))
-    #image = 'https://img.alicdn.com/bao/uploaded/i2/890482188/TB1viAXdAfb_uJkSnfoXXb_epXa_!!0-item_pic.jpg'
-    image = request.args.getlist('url')
+    url = request.args.get('url')
     girh = GeneralIRHandler()
-    result = girh.predict(image_url=image)
+    result = girh.predict(image_url=url)
     data = {
         'result': int(result)
     }
