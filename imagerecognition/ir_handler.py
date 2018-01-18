@@ -10,9 +10,6 @@ import random
 class GeneralIRHandler:
     data_root = "data/logos/"
 
-    def __init__(self):
-        print('ola')
-
     def load_data(self, data_directory):
         directories = [d for d in os.listdir(data_directory)
                        if os.path.isdir(os.path.join(data_directory, d))]
@@ -61,6 +58,7 @@ class GeneralIRHandler:
         sess.run(tf.global_variables_initializer())
         for i in range(201):
             _, accuracy_val = sess.run([train_op, accuracy], feed_dict={x: images28, y: labels})
+        # load image
         imagedata= io.imread(image_url)
         # Rescale the images in the `images` array
         images28 = transform.resize(imagedata, (28, 28))
@@ -70,4 +68,4 @@ class GeneralIRHandler:
         images28 = rgb2gray(images28)
         # predict
         predicted = sess.run([correct_pred], feed_dict={x: [images28]})[0]
-        print(predicted)
+        return predicted[0]
