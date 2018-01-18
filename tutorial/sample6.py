@@ -10,6 +10,8 @@ import random
 
 
 #################################################################################
+
+#################################################################################
 def load_data(data_directory):
     directories = [d for d in os.listdir(data_directory)
                    if os.path.isdir(os.path.join(data_directory, d))]
@@ -40,16 +42,16 @@ images, labels = load_data(train_data_directory)
 # exit()
 #################################################################################
 # Determine the (random) indexes of the images that you want to see
-traffic_signs = [1, 2, 3, 4]
-
-# Fill out the subplots with the random images that you defined
-for i in range(len(traffic_signs)):
-    plt.subplot(1, 4, i + 1)
-    plt.axis('off')
-    # plt.imshow(images[traffic_signs[i]])
-    plt.subplots_adjust(wspace=0.5)
-
-# plt.show()
+# traffic_signs = [1, 2, 3, 4]
+#
+# # Fill out the subplots with the random images that you defined
+# for i in range(len(traffic_signs)):
+#     plt.subplot(1, 4, i + 1)
+#     plt.axis('off')
+#     # plt.imshow(images[traffic_signs[i]])
+#     plt.subplots_adjust(wspace=0.5)
+#
+# # plt.show()
 
 #################################################################################
 # # Get the unique labels
@@ -168,20 +170,32 @@ predicted = sess.run([correct_pred], feed_dict={x: sample_images})[0]
 print(sample_labels)
 print(predicted)
 
-# Display the predictions and the ground truth visually.
-fig = plt.figure(figsize=(10, 10))
-for i in range(len(sample_images)):
-    truth = sample_labels[i]
-    prediction = predicted[i]
-    plt.subplot(5, 2, 1 + i)
-    plt.axis('off')
-    color = 'green' if truth == prediction else 'red'
-    plt.text(40, 10, "Truth:        {0}\nPrediction: {1}".format(truth, prediction),
-             fontsize=12, color=color)
-    plt.imshow(sample_images[i], cmap="gray")
-
-plt.show()
+# # Display the predictions and the ground truth visually.
+# fig = plt.figure(figsize=(10, 10))
+# for i in range(len(sample_images)):
+#     truth = sample_labels[i]
+#     prediction = predicted[i]
+#     plt.subplot(5, 2, 1 + i)
+#     plt.axis('off')
+#     color = 'green' if truth == prediction else 'red'
+#     plt.text(40, 10, "Truth:        {0}\nPrediction: {1}".format(truth, prediction),
+#              fontsize=12, color=color)
+#     plt.imshow(sample_images[i], cmap="gray")
+#
+# plt.show()
 #################################################################################
+
+imagedata = data.imread('data/images/brands/1/1.ppm')
+#################################################################################
+# Rescale the images in the `images` array
+images28 = transform.resize(imagedata, (28, 28))
+# Convert `images28` to an array
+images28 = np.array(images28)
+# Convert `images28` to grayscale
+images28 = rgb2gray(images28)
+# predict
+predicted = sess.run([correct_pred], feed_dict={x: [images28]})[0]
+print(predicted)
 
 #################################################################################
 # Close the session
