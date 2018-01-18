@@ -6,3 +6,5 @@ sympy
 flask
 redis
 sklearn
+tensorflow
+scikit-image
